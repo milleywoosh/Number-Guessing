@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number GUessing Game</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        #inputBox {
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 16px;
+            padding: 10px;
+            margin: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Guess The Number</h3>
+    <p>Guess a number between 1 to 100: </p>
+    <div id="result"></div>
+    <div id="inputBox">
+        <input type="number" id="guessInput" placeholder="Type your guess!">
+        <button onclick="checkGuess()">Submit Guess</button>
+
+        <script>
+            let secretNumber;
+            let attempts = 0;
+
+            function startGame(){
+                secretNumber = Math.floor(Math.random) * 100 + 1;
+                attempts = 0;
+
+                document.getElementById('result').innerHTML = "";
+
+                document.getElementById('guessInput').value = "";
+
+                function checkGuess(){
+                    const userGuess = parseInt(document.getElementById('guessInput').value);
+                    attempts++;
+
+                    if(isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                        document.getElementById('result').innerHTML = "Please Enter a Valid Number between 1 to 100.";
+                    } else if(userGuess === secretNumber){
+                        document.getElementById('result').innerHTML = "Congratulations! You Guessed the Number in ${attempts} attempts.";
+                    } else if(userGuess < secretNumber){
+                        document.getElementById('result').innerHTML = "Too low! Try again!";
+                    } else{
+                        document.getElementById('result').innerHTML = "Too high! Try again!";
+                    }
+                }
+
+                function restartGame() {
+                    startGame();
+                }
+
+                document.getElementById('result').innerHTML = "";
+            }
+        </script>
+</body>
+</html>
